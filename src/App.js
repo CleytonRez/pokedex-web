@@ -1,23 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="input">
+        <h1>POKEDEX</h1>
+        <label for="nTarefa" className="nPokemon">Novo POKEMON:</label>
+        <input type="text" id="nPokemon" name="nPokemon" className="input" />
+        <button type="button" className="buttonOK">OK</button>
+      </div>
     </div>
   );
 }
