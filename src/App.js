@@ -1,15 +1,23 @@
 import './App.css';
+import StrenghtForm from './PokedexForm/StrengthForm';
+import NameForm from './PokedexForm/NameForm';
+import DefenseForm from './PokedexForm/DefenseForm';
+import WeaknesseForm from './PokedexForm/WeaknesseForm';
 
 function App() {
   return (
     <div className="App">
-      <div className="input">
+
+      <div className="formContainer">
         <h1>POKEDEX</h1>
-        <label for="nTarefa" className="nPokemon">Novo POKEMON:</label>
-        <input type="text" id="nPokemon" name="nPokemon" className="input" />
+        <NameForm />
+        <StrenghtForm />
+        <DefenseForm />
+        <WeaknesseForm />
+
         <button type="button" className="buttonOK">OK</button>
       </div>
-    </div>
+    </div >
   );
 }
 
