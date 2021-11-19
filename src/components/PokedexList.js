@@ -1,5 +1,5 @@
 import React from "react";
-import PokemonItem from "../PokedexItem";
+import PokemonItem from "./PokedexItem";
 
 // Componente que adiciona a lista de Pokemons para o Usuario.
 const PokedexList = (props) => {

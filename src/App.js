@@ -1,7 +1,7 @@
 import './App.css';
-import PokedexForm from './PokedexForm/PokedexForm';
-import PokedexItem from './PokedexItem';
-import PokedexList from './PokedexList';
+import PokedexForm from './components/PokedexForm';
+import PokedexItem from './components/PokedexItem';
+import PokedexList from './components/PokedexList';
 import React, { useEffect } from 'react';
 import { getPokemons, postPokemon, deletePokemon, putPokemon } from './api/api';
 
