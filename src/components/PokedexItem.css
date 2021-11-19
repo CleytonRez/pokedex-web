@@ -1,0 +1,9 @@
+.divNovoPokemon{
+    background-color: rgb(139, 138, 138);
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.textPokemonItem{
+    margin: 10px;
+}

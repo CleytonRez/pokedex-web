@@ -21,6 +21,7 @@ export const postPokemon = async (body, loadPokemons) => {
         if (loadPokemons) loadPokemons();
 
     } catch (e) {
+        console.log("BODY: ", body)
         console.log(e.message)
     }
 
