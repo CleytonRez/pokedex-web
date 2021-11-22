@@ -1,5 +1,6 @@
 import './App.css';
 import PokedexForm from './components/PokedexForm';
+import AbilitiesForm from './components/AbilitiesForm';
 import PokedexItem from './components/PokedexItem';
 import PokedexList from './components/PokedexList';
 import React, { useEffect } from 'react';
@@ -34,7 +35,7 @@ function App() {
   // Funcao que adiciona nova tarefa ao Estado.
   const handleSetPokemon = (pokemon) => {
 
-    // Se for pokemonUpdate ele atualiza e cira Pokemons.
+    // Se for pokemonUpdate ele atualiza e cria Pokemons.
     if (pokemonUpdate) {
       putPokemon(pokemon, loadPokemons)
     } else {

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import './PokedexForm.css';
 import { formatDate } from '../utils/formatDate';
+import AbilitiesForm from './AbilitiesForm';
 
 const PokedexForm = (props) => {
 
 
     // ---------------------- STATES ----------------------------- //
-    // Estado contendo o nome do Pokemon 
+    // Estado contendo a data do Pokemon 
     const [date, setDate] = React.useState(formatDate(new Date())) // Valor Inicial
 
 
@@ -15,25 +16,32 @@ const PokedexForm = (props) => {
 
     console.log("NAME: ", name)
 
-    // Estado contendo o nome do Pokemon 
+    // Estado contendo a Forca do Pokemon 
     const [strength, setStrength] = React.useState("") // Valor Inicial
 
     console.log("Strength: ", strength)
 
 
-    // Estado contendo o nome do Pokemon 
+    // Estado contendo a Defesa do Pokemon 
     const [defense, setDefense] = React.useState("") // Valor Inicial
 
     console.log("Defense: ", defense)
 
 
-    // Estado contendo o nome do Pokemon 
+    // Estado contendo a Fraqueza do Pokemon 
     const [weaknesses, setWeaknesses] = React.useState([]) // Valor Inicial
 
     const [weaknessList] = React.useState(["Fire", "Water", "Wind", "Earth"])
 
+
     console.log("Weaknesses: ", weaknesses)
 
+
+    // Estado de Habilidades.
+    const [abilities, setAbilities] = React.useState([]) // Valor Inicial
+
+
+    // Funcao usada para poder editar as informacoes.
     useEffect(() => {
 
         if (props.pokemon) {
@@ -43,6 +51,7 @@ const PokedexForm = (props) => {
             setStrength(props.pokemon.strength)
             setDefense(props.pokemon.defense)
             setWeaknesses(props.pokemon.weaknesses)
+            setAbilities(props.pokemon.abilities)
         }
 
     }, [props.pokemon])
@@ -107,6 +116,7 @@ const PokedexForm = (props) => {
         console.log(value)
 
     }
+
     // ---------------- HANDLE CLICK ----------------------- //
 
     // funcao quando clica no OK.
@@ -127,6 +137,8 @@ const PokedexForm = (props) => {
         )
         console.log(name, strength, defense, weaknesses)
         console.log("Clicou ")
+
+        // Limpa os Inputs do Formulario.
         setDate("")
         setName("")
         setStrength("")
@@ -135,13 +147,22 @@ const PokedexForm = (props) => {
 
     }
 
+    // Funcao que adiciona as informacoes de Habilidade na Lista/Estado abilities.
+    const handleSetAbilities = (ability) => {
+        const newAbilitiesList = [...abilities]
+        newAbilitiesList.push(ability)
+
+        setAbilities(newAbilitiesList)
+    }
+
+
 
     // Retorna HTML do Formulario.
     return (
         <div className="formContainer">
 
             <div className="birthDate">
-                <label for="birthDate" className="birthDate">BirthDate:</label>
+                <label for="birthDate" className="birthDate">Pokemon BirthDate:</label>
                 <input type="date" id="birthDate" name="birthDate" className="birthDate" onChange={handleEventDate} value={date} />
             </div>
 
@@ -173,9 +194,9 @@ const PokedexForm = (props) => {
                     })
                 }
             </div>
+            <AbilitiesForm handleSetAbilities={handleSetAbilities} pokemon={props.pokemonUpdate} abilities={abilities} />
             <br />
-            <button type="button" className="buttonOK" onClick={handleClick} >OK</button>
-
+            <button type="button" className="buttonOK" onClick={handleClick} >Ok</button>
         </div>
     )
 }
