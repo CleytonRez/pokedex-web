@@ -123,7 +123,7 @@ const AbilitiesForm = (props) => {
             <button type="button" className="buttonADD" onClick={handleClickADD} >+</button>
 
             <div>
-                {props.abilities.map((ability) => {
+                {props.abilities && props.abilities.map((ability) => {
                     return (
                         <div>
                             <p className="textPokemonAbility">Ability Name: {ability.name}</p>

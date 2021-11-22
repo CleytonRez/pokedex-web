@@ -131,6 +131,7 @@ const PokedexForm = (props) => {
                 strength,
                 defense,
                 weaknesses,
+                abilities,
                 "img": null
 
             }
@@ -144,6 +145,7 @@ const PokedexForm = (props) => {
         setStrength("")
         setDefense("")
         setWeaknesses("")
+        setAbilities("")
 
     }
 
