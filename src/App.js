@@ -5,6 +5,13 @@ import PokedexItem from './components/PokedexItem';
 import PokedexList from './components/PokedexList';
 import React, { useEffect } from 'react';
 import { getPokemons, postPokemon, deletePokemon, putPokemon } from './api/api';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import { formateDateToAPI } from './utils/formatDate';
 
 function App() {
 
@@ -18,7 +25,6 @@ function App() {
   const loadPokemons = async () => {
 
     const response = await getPokemons()
-    console.log("LOADPOKEMONS: ", response)
 
     setPokemons(response)
   }
@@ -49,12 +55,41 @@ function App() {
   // Retorna Componente com HTML.
   return (
     <div className="App">
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">LIST</Link>
+              </li>
+              <li>
+                <Link to="/registration">REGISTRATION</Link>
+              </li>
+            </ul>
+          </nav>
 
-      <div className="formContainer">
-        <h1>POKEDEX</h1>
-        <PokedexForm handleSetPokemon={handleSetPokemon} pokemon={pokemonUpdate} />
-        <PokedexList items={pokemons} />
-      </div>
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/registration">
+              <div className="formContainer">
+                <h1>POKEDEX</h1>
+
+                <PokedexForm handleSetPokemon={handleSetPokemon} pokemon={pokemonUpdate} />
+
+              </div>
+            </Route>
+            <Route path="/">
+              <div className="formContainer">
+                <h1>POKEDEX</h1>
+
+                <PokedexList items={pokemons} />
+
+              </div>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
 
     </div >
   );

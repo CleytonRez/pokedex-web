@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './PokedexForm.css';
-import { formatDate } from '../utils/formatDate';
+import { formatDate, formateDateToAPI } from '../utils/formatDate';
 import AbilitiesForm from './AbilitiesForm';
 
 const PokedexForm = (props) => {
@@ -14,27 +14,21 @@ const PokedexForm = (props) => {
     // Estado contendo o nome do Pokemon 
     const [name, setName] = React.useState("") // Valor Inicial
 
-    console.log("NAME: ", name)
 
     // Estado contendo a Forca do Pokemon 
     const [strength, setStrength] = React.useState("") // Valor Inicial
 
-    console.log("Strength: ", strength)
 
 
     // Estado contendo a Defesa do Pokemon 
     const [defense, setDefense] = React.useState("") // Valor Inicial
 
-    console.log("Defense: ", defense)
 
 
     // Estado contendo a Fraqueza do Pokemon 
     const [weaknesses, setWeaknesses] = React.useState([]) // Valor Inicial
 
     const [weaknessList] = React.useState(["Fire", "Water", "Wind", "Earth"])
-
-
-    console.log("Weaknesses: ", weaknesses)
 
 
     // Estado de Habilidades.
@@ -55,7 +49,6 @@ const PokedexForm = (props) => {
         }
 
     }, [props.pokemon])
-    console.log("DATE: ", date)
 
 
     // ---------------- HANDLE EVENTS --------------------- //
@@ -64,8 +57,8 @@ const PokedexForm = (props) => {
     const handleEventDate = (event) => {
 
         // seta o texto do Input nos Estados.
+        console.log({ w: event.target.value })
         setDate(formatDate(new Date(event.target.value)))
-        console.log(event.target.value)
 
     }
     // Funcao que captura oque e escrito no Input do Name.
@@ -73,7 +66,6 @@ const PokedexForm = (props) => {
 
         // seta o texto do Input nos Estados.
         setName(event.target.value)
-        console.log(event.target.value)
 
     }
 
@@ -82,7 +74,6 @@ const PokedexForm = (props) => {
 
         // seta o texto do Input nos Estados.
         setStrength(event.target.value)
-        console.log(event.target.value)
 
     }
 
@@ -91,7 +82,6 @@ const PokedexForm = (props) => {
 
         // seta o texto do Input nos Estados.
         setDefense(event.target.value)
-        console.log(event.target.value)
 
     }
 
@@ -121,12 +111,13 @@ const PokedexForm = (props) => {
 
     // funcao quando clica no OK.
     const handleClick = () => {
-
+        formateDateToAPI(date)
         // Variavel contendo as informacoes do body.
         const body = props.pokemon || {}
 
         props.handleSetPokemon(
             {
+                birthDate: date,
                 name,
                 strength,
                 defense,
@@ -137,7 +128,6 @@ const PokedexForm = (props) => {
             }
         )
         console.log(name, strength, defense, weaknesses)
-        console.log("Clicou ")
 
         // Limpa os Inputs do Formulario.
         setDate("")
@@ -157,6 +147,17 @@ const PokedexForm = (props) => {
         setAbilities(newAbilitiesList)
     }
 
+    const handleDeleteAbilities = (ability) => {
+        let newAbilitiesList = []
+        abilities.forEach((ability) => {
+            if (ability.id !== abilities.id) {
+                newAbilitiesList.push(ability)
+
+            }
+        })
+        setAbilities(newAbilitiesList)
+    }
+
 
 
     // Retorna HTML do Formulario.
@@ -164,27 +165,27 @@ const PokedexForm = (props) => {
         <div className="formContainer">
 
             <div className="birthDate">
-                <label for="birthDate" className="birthDate">Pokemon BirthDate:</label>
+                <label for="birthDate" className="birthDate">- Pokemon BirthDate:</label>
                 <input type="date" id="birthDate" name="birthDate" className="birthDate" onChange={handleEventDate} value={date} />
             </div>
 
             <div className="namePokemon">
-                <label for="namePokemon" className="nPokemon">Pokemon Name:</label>
+                <label for="namePokemon" className="nPokemon">- Pokemon Name:</label>
                 <input type="text" id="namePokemon" name="namePokemon" className="namePokemon" onChange={handleEventName} value={name} />
             </div>
 
             <div className="strenghtPokemon">
-                <label for="strenghtPokemon" className="strengthPokemon" >Pokemon Strength (N): </label>
+                <label for="strenghtPokemon" className="strengthPokemon" >- Pokemon Strength (N): </label>
                 <input type="number" className="strenghtPokemon" onChange={handleEventStrength} value={strength}></input>
             </div>
 
             <div className="defensePokemon">
-                <label for="defensePokemon" className="defensePokemon">Pokemon Defense (N): </label>
+                <label for="defensePokemon" className="defensePokemon">- Pokemon Defense (N): </label>
                 <input type="number" className="defensePokemon" onChange={handleEventDefense} value={defense}></input>
             </div>
 
             <div className="weaknessesPokemon">
-                <label for="weaknessesPokemon" className="weaknessesPokemon">Pokemon Weaknesses: </label>
+                <label for="weaknessesPokemon" className="weaknessesPokemon">- Pokemon Weaknesses: </label>
                 {
                     weaknessList.map((weak) => {
                         return (
@@ -195,8 +196,9 @@ const PokedexForm = (props) => {
                         )
                     })
                 }
+                <br />
             </div>
-            <AbilitiesForm handleSetAbilities={handleSetAbilities} pokemon={props.pokemonUpdate} abilities={abilities} />
+            <AbilitiesForm handleSetAbilities={handleSetAbilities} pokemon={props.pokemonUpdate} abilities={abilities} handleDeleteAbilities={handleDeleteAbilities} />
             <br />
             <button type="button" className="buttonOK" onClick={handleClick} >Ok</button>
         </div>

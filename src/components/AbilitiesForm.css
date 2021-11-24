@@ -1,12 +1,17 @@
 .formContainer{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     padding: 10px;
 }
 .namePokemon, .strenghtPokemon, .defensePokemon ,.weaknessesPokemon{
     margin: 2px;
 }
 .abilitiesPokemon{
-    border-width: 5px;
+    border-width: px;
     border-style: solid;    
     border-color: black;
+    padding: 10px;
+}
+
+.textPokemonAbility{
+    display: inline;
 }

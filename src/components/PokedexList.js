@@ -1,5 +1,7 @@
 import React from "react";
+import AbilitiesItem from "./PokedexItem";
 import PokemonItem from "./PokedexItem";
+
 
 // Componente que adiciona a lista de Pokemons para o Usuario.
 const PokedexList = (props) => {
@@ -11,6 +13,7 @@ const PokedexList = (props) => {
 
                     // Retorna os Pokemons para o Usuario.
                     return <PokemonItem pokemon={pokemon} />
+
                 })
             }
         </div>
